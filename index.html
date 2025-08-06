@@ -1,131 +1,163 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Peça sua Coxinha</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Faça seu pedido de coxinha</title>
   <style>
     body {
       margin: 0;
-      font-family: 'Arial', sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-image: url('fundo.png');
-      background-size: 200px;
-      background-repeat: repeat;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
       background-attachment: fixed;
-      color: #333;
     }
-
-    header {
-      background-color: rgba(255, 255, 255, 0.85);
-      padding: 30px;
+    .overlay {
+      background-color: rgba(255, 255, 255, 0.92);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1rem;
+    }
+    h1 {
+      font-size: 2rem;
+      color: #D35400;
       text-align: center;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      margin-bottom: 1rem;
     }
-
-    header h1 {
-      font-size: 36px;
-      color: #d35400;
-      margin: 0;
+    .card {
+      background-color: #fff;
+      border-radius: 16px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+      padding: 2rem;
+      max-width: 500px;
+      width: 100%;
+      animation: fadeIn 0.8s ease;
     }
-
-    main {
-      max-width: 600px;
-      margin: 40px auto;
-      background-color: rgba(255, 255, 255, 0.95);
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    @keyframes fadeIn {
+      from { opacity:0; transform:translateY(20px); }
+      to { opacity:1; transform:translateY(0); }
     }
-
     label {
       display: block;
-      margin-top: 20px;
+      margin-top: 1rem;
       font-weight: bold;
-      color: #c0392b;
+      color: #444;
     }
-
     input, select, textarea {
       width: 100%;
-      padding: 12px;
-      margin-top: 6px;
-      border: 1px solid #ccc;
+      padding: 0.75rem;
+      margin-top: 0.3rem;
       border-radius: 8px;
-      box-sizing: border-box;
+      border: 1px solid #ccc;
+      font-size: 1rem;
     }
-
     button {
-      margin-top: 30px;
-      width: 100%;
-      padding: 14px;
-      background-color: #e67e22;
-      color: white;
-      font-size: 18px;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-
-    button:hover {
-      background-color: #d35400;
-    }
-
-    footer {
-      text-align: center;
-      padding: 20px;
-      font-size: 14px;
+      background-color: #E67E22;
       color: #fff;
-      background: rgba(0,0,0,0.2);
+      padding: 0.9rem 1.2rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+      cursor: pointer;
+      width: 100%;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #D35400;
+    }
+    .price-info {
+      background-color: #FDEBD0;
+      padding: 1rem;
+      border-radius: 12px;
+      margin-bottom: 1rem;
+      text-align: center;
+      font-weight: bold;
+      color: #6E2C00;
     }
   </style>
 </head>
 <body>
+  <div class="overlay">
+    <div class="card">
+      <h1>Faça seu pedido de coxinha</h1>
 
-  <header>
-    <h1>Peça sua Coxinha</h1>
-  </header>
+      <div class="price-info">
+        Coxinha tradicional<br/>
+        R$ 49,90 o cento | R$ 29,90 meio cento
+      </div>
 
-  <main>
-    <form>
-      <label for="nome">Nome completo</label>
-      <input type="text" id="nome" name="nome" placeholder="Seu nome" required>
+      <form id="pedidoForm">
+        <label for="quantidade">Quantidade desejada:</label>
+        <select id="quantidade" name="quantidade" required>
+          <option value="">Selecione</option>
+          <option value="Meio cento (50 unidades) - R$ 29,90">Meio cento (50 unidades) - R$ 29,90</option>
+          <option value="Um cento (100 unidades) - R$ 49,90">Um cento (100 unidades) - R$ 49,90</option>
+          <option value="Um cento e meio (150 unidades) - R$ 74,85">Um cento e meio (150 unidades) - R$ 74,85</option>
+          <option value="Dois centos (200 unidades) - R$ 99,80">Dois centos (200 unidades) - R$ 99,80</option>
+        </select>
 
-      <label for="quantidade">Quantidade de coxinhas</label>
-      <input type="number" id="quantidade" name="quantidade" placeholder="Ex: 10" required>
+        <label for="nome">Seu nome:</label>
+        <input type="text" id="nome" name="nome" required />
 
-      <label for="sabor">Sabor</label>
-      <select id="sabor" name="sabor" required>
-        <option value="">Selecione</option>
-        <option value="frango">Frango</option>
-        <option value="frango-catupiry">Frango com Catupiry</option>
-        <option value="carne">Carne</option>
-        <option value="queijo">Queijo</option>
-      </select>
+        <label for="telefone">WhatsApp:</label>
+        <input type="tel" id="telefone" name="telefone" placeholder="(00) 00000-0000" required />
 
-      <h3>Endereço de Entrega</h3>
+        <label for="rua">Rua:</label>
+        <input type="text" id="rua" name="rua" required />
 
-      <label for="rua">Rua</label>
-      <input type="text" id="rua" name="rua" required>
+        <label for="numero">Número:</label>
+        <input type="text" id="numero" name="numero" required />
 
-      <label for="numero">Número</label>
-      <input type="text" id="numero" name="numero" required>
+        <label for="bairro">Bairro:</label>
+        <input type="text" id="bairro" name="bairro" required />
 
-      <label for="bairro">Bairro</label>
-      <input type="text" id="bairro" name="bairro" required>
+        <label for="cidade">Cidade:</label>
+        <input type="text" id="cidade" name="cidade" required />
 
-      <label for="cidade">Cidade</label>
-      <input type="text" id="cidade" name="cidade" required>
+        <label for="complemento">Complemento / Ponto de referência:</label>
+        <input type="text" id="complemento" name="complemento" />
 
-      <label for="complemento">Complemento / Ponto de Referência</label>
-      <textarea id="complemento" name="complemento" rows="2"></textarea>
+        <label for="observacao">Observação:</label>
+        <input type="text" id="observacao" name="observacao" />
 
-      <button type="submit">Fazer Pedido</button>
-    </form>
-  </main>
+        <button type="submit">Enviar pedido pelo WhatsApp</button>
+      </form>
+    </div>
+  </div>
 
-  <footer>
-    &copy; 2025 Coxinhas Delivery. Todos os direitos reservados.
-  </footer>
+  <script>
+    document.getElementById('pedidoForm').addEventListener('submit', function(e) {
+      e.preventDefault();
 
+      const quantidade = document.getElementById('quantidade').value;
+      const nome = document.getElementById('nome').value;
+      const telefone = document.getElementById('telefone').value;
+      const rua = document.getElementById('rua').value;
+      const numero = document.getElementById('numero').value;
+      const bairro = document.getElementById('bairro').value;
+      const cidade = document.getElementById('cidade').value;
+      const complemento = document.getElementById('complemento').value;
+      const observacao = document.getElementById('observacao').value;
+
+      let mensagem = 
+        "Olá! Gostaria de fazer um pedido:\n\n" +
+        "------------------------\n" +
+        "Quantidade: " + quantidade + "\n" +
+        "Nome: " + nome + "\n" +
+        "WhatsApp: " + telefone + "\n" +
+        "Endereço: " + rua + ", " + numero + ", " + bairro + ", " + cidade + "\n" +
+        "Complemento: " + complemento + "\n" +
+        "Observação: " + observacao;
+
+      const url = "https://wa.me/553193600484?text=" + encodeURIComponent(mensagem);
+
+      window.open(url, "_blank");
+    });
+  </script>
 </body>
 </html>
